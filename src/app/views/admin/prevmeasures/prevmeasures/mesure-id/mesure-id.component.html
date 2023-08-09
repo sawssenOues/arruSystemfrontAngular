@@ -1,0 +1,29 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="col-sm-12 col-xl-6">
+
+  </div>
+  <div class="bg-light rounded h-100 p-4">
+
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <h6 class="mb-4">Détailles mesure :</h6>
+      <button type="button" class="btn btn-sm btn-sm-square btn-outline-primary m-2" onclick="history.back()"><i
+          class="fa fa-arrow-left"></i></button>
+    </div>
+    <dl class="row mb-0">
+      <dt class="col-sm-4">Titre</dt>
+      <dd class="col-sm-8">{{obj.titre}}</dd>
+
+      <dt class="col-sm-4">Description</dt>
+      <dd class="col-sm-8">{{obj.description}}</dd>
+
+      <dt class="col-sm-4">Créé le</dt>
+      <dd class="col-sm-8">{{obj.created_at | date: 'dd/MM/yy, à HH:mm'}}</dd>
+
+      <dt class="col-sm-4 text-truncate">Modifié le</dt>
+      <dd class="col-sm-8">{{ (obj.updated_at !== null) ? (obj.updated_at | date: 'dd/MM/yy, à HH:mm') : "Aucune" }}
+      </dd>
+
+    </dl>
+  </div>
+</div>
+
