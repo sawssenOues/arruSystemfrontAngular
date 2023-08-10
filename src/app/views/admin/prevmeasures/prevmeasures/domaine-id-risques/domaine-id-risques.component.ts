@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
 import { PopupComponent } from '../popup/popup.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-domaine-id-risques',
@@ -30,20 +31,30 @@ export class DomaineIdRisquesComponent {
       width: '600px' // Width should be included in the configuration object
     });
   }
-  openDialogupdate(num: any) {
-    this.pr.getdomainebyid(num).subscribe(data => {
-      const auxObj: any = data;
-      const dialogRef = this.dialogRef.open(PopupComponent, {
-        data: {
-          name: 'risque',
-          id: num,
-          third: '0'
-        },
-        width: '600px'
-      });
+  dataris={
+    titre:'',
+    description:'',
+    id:0,
+    domaine_id:0
+  }
+  getdata(id:any,titre:any,description:any,domaine_id:any){
+    this.dataris.id=id
+    this.dataris.titre=titre
+    this.dataris.description=description
+    this.dataris.domaine_id=domaine_id
+  }
 
+  updatenewstudent(f:any){
+    const { id, ...dataWithoutId } = this.dataris;
+    console.log(dataWithoutId)
+    this.pr.updateRisque(dataWithoutId,this.dataris.domaine_id,this.dataris.id).subscribe(response=>
+      {
+      console.log(response)
 
-    });
+      },(err:HttpErrorResponse)=>{
+        console.log(err.message)
+
+      })
   }
 
 

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-domaine',
   templateUrl: './domaine.component.html',

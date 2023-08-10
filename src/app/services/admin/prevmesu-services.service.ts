@@ -36,6 +36,12 @@ export class PrevmesuServicesService {
     return this.http.post('http://localhost:3000/Admin/Domaines/'+domid+'/Risques/ajoutRisque',form).pipe(catchError(this.errorHandler))
   }
 
+  updateRisque(form:any,n:any,num:any){
+    return this.http.put('http://localhost:3000/Admin/Domaines/'+ n +'/Risques/update/'+ num ,form).pipe(catchError(this.errorHandler))
+  }
+
+
+
   getAllmesures(num:any){
     return this.http.get('http://localhost:3000/Admin/Risques/'+ num +'/Mesures' ).pipe(catchError(this.errorHandler))
   }
@@ -45,6 +51,12 @@ export class PrevmesuServicesService {
   addMesure(form:any,risid:any){
     return this.http.post('http://localhost:3000/Admin/Risques/'+risid+'/Mesures/ajoutMesure',form).pipe(catchError(this.errorHandler))
   }
+  updateMesure(form:any,n:any,num:any){
+    return this.http.put('http://localhost:3000/Admin/Risques/'+ n +'/Mesures/update/'+ num ,form).pipe(catchError(this.errorHandler))
+  }
+
+
+
 
   private errorHandler(error: HttpErrorResponse) {
     if (error.status === 0) {

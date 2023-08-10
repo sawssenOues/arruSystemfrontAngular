@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
 import { PopupComponent } from '../popup/popup.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-risque-id-mesures',
@@ -32,12 +33,28 @@ export class RisqueIdMesuresComponent {
       width: '600px' // Width should be included in the configuration object
     });
   }
-  openDialogupdate(num:any) {
-    const dialogRef = this.dialogRef.open(PopupComponent, {
-      data: {
-        name: 'mesure', id:num,third:'0'
-      },
-      width: '600px' // Width should be included in the configuration object
-    });
+  datames={
+    titre:'',
+    description:'',
+    id:0,
+    risque_id:0
+  }
+  getdata(id:any,titre:any,description:any,risque_id:any){
+    this.datames.id=id
+    this.datames.titre=titre
+    this.datames.description=description
+    this.datames.risque_id=risque_id
+  }
+
+  updatenewstudent(f:any){
+    const { id, ...dataWithoutId } = this.datames;
+    this.pr.updateMesure(dataWithoutId,this.datames.risque_id,this.datames.id).subscribe(response=>
+      {
+      console.log(response)
+
+      },(err:HttpErrorResponse)=>{
+        console.log(err.message)
+
+      })
   }
 }
