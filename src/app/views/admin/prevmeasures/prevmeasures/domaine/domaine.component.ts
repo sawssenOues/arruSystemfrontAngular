@@ -22,11 +22,18 @@ export class DomaineComponent {
   openDialog() {
     const dialogRef = this.dialogRef.open(PopupComponent, {
       data: {
-        name: 'domaine'
+        name: 'domaine',id:'new'
       },
       width: '600px' // Width should be included in the configuration object
     });
   }
-
+  openDialogupdate(num:any) {
+    const dialogRef = this.dialogRef.open(PopupComponent, {
+      data: {
+        name: 'domaine', id:num
+      },
+      width: '600px' // Width should be included in the configuration object
+    });
+  }
 
 }

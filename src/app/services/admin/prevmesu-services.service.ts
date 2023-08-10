@@ -15,6 +15,10 @@ export class PrevmesuServicesService {
   getdomainebyid(num:any){
     return this.http.get('http://localhost:3000/Admin/Domaines/'+ num ).pipe(catchError(this.errorHandler))
   }
+  
+  addDomaine(form:any){
+    return this.http.post('http://localhost:3000/Admin/Domaines/ajout',form).pipe(catchError(this.errorHandler))
+  }
 
 
   getAllrisques(num:any){
