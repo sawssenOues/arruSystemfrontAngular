@@ -15,7 +15,7 @@ export class PrevmesuServicesService {
   getdomainebyid(num:any){
     return this.http.get('http://localhost:3000/Admin/Domaines/'+ num ).pipe(catchError(this.errorHandler))
   }
-  
+
   addDomaine(form:any){
     return this.http.post('http://localhost:3000/Admin/Domaines/ajout',form).pipe(catchError(this.errorHandler))
   }
@@ -28,12 +28,18 @@ export class PrevmesuServicesService {
     return this.http.get('http://localhost:3000/Admin/Domaines/'+ n +'/Risques/'+ num ).pipe(catchError(this.errorHandler))
   }
 
+  addRisque(form:any,domid:any){
+    return this.http.post('http://localhost:3000/Admin/Domaines/'+domid+'/Risques/ajoutRisque',form).pipe(catchError(this.errorHandler))
+  }
 
   getAllmesures(num:any){
     return this.http.get('http://localhost:3000/Admin/Risques/'+ num +'/Mesures' ).pipe(catchError(this.errorHandler))
   }
   getmesurebyid(n:any,num:any){
     return this.http.get('http://localhost:3000/Admin/Risques/'+ n +'/Mesures/'+ num ).pipe(catchError(this.errorHandler))
+  }
+  addMesure(form:any,risid:any){
+    return this.http.post('http://localhost:3000/Admin/Risques/'+risid+'/Mesures/ajoutMesure',form).pipe(catchError(this.errorHandler))
   }
 
   private errorHandler(error: HttpErrorResponse) {

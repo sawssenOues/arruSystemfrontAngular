@@ -22,7 +22,7 @@ export class DomaineComponent {
   openDialog() {
     const dialogRef = this.dialogRef.open(PopupComponent, {
       data: {
-        name: 'domaine',id:'new'
+        name: 'domaine',id:'new',third:'0'
       },
       width: '600px' // Width should be included in the configuration object
     });
@@ -30,7 +30,7 @@ export class DomaineComponent {
   openDialogupdate(num:any) {
     const dialogRef = this.dialogRef.open(PopupComponent, {
       data: {
-        name: 'domaine', id:num
+        name: 'domaine', id:num,third:'0'
       },
       width: '600px' // Width should be included in the configuration object
     });

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-risque-id-mesures',
@@ -12,7 +14,7 @@ export class RisqueIdMesuresComponent {
   num=''
   obj:any
   dataArray:any=[]
-  constructor(private route: Router, private pr : PrevmesuServicesService ,private aroute:ActivatedRoute) {
+  constructor(private route: Router, private pr : PrevmesuServicesService ,private aroute:ActivatedRoute , private dialogRef: MatDialog) {
 
     this.aroute.params.subscribe(data=>this.n=data['id'])
     this.aroute.params.subscribe(data=>this.num=data['idr'])
@@ -22,5 +24,20 @@ export class RisqueIdMesuresComponent {
   goToDetails(mes:any) {
     this.route.navigate(['/admin/prevmeasures/mesures/'+this.num+'/'+mes])
   }
-
+  openDialog(risid:any) {
+    const dialogRef = this.dialogRef.open(PopupComponent, {
+      data: {
+        name: 'mesure',id:'new',third:risid
+      },
+      width: '600px' // Width should be included in the configuration object
+    });
+  }
+  openDialogupdate(num:any) {
+    const dialogRef = this.dialogRef.open(PopupComponent, {
+      data: {
+        name: 'mesure', id:num,third:'0'
+      },
+      width: '600px' // Width should be included in the configuration object
+    });
+  }
 }
