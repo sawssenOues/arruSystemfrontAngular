@@ -1,0 +1,25 @@
+<div class="bg-light rounded h-100 p-4">
+  <h6 class="mb-4">Basic Form {{obj}}</h6>
+  <form [formGroup]="popForm">
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input formControlName="titre" type="text" class="form-control" id="title" required minlength="3">
+      <div *ngIf="popForm.get('titre')?.touched && popForm.get('titre')?.hasError('required')"
+        class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-circle me-2"></i>Le champs titre est obligatoire
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div *ngIf="popForm.get('titre')?.touched && popForm.get('titre')?.hasError('minlength')"
+        class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-circle me-2"></i>Minimum 3 lettres
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="Description" class="form-label">Description</label>
+      <textarea formControlName="description" class="form-control" placeholder="Ajouter une description ici."
+        id="Textarea" style="height: 150px;"></textarea>
+    </div>
+    <button type="submit" (click)="saveForm()" class="btn btn-primary">Enregistrer</button>
+  </form>
+</div>

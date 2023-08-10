@@ -7,6 +7,8 @@ import { DomaineComponent } from './prevmeasures/domaine/domaine.component';
 import { DomaineIdRisquesComponent } from './prevmeasures/domaine-id-risques/domaine-id-risques.component';
 import { RisqueIdMesuresComponent } from './prevmeasures/risque-id-mesures/risque-id-mesures.component';
 import { MesureIdComponent } from './prevmeasures/mesure-id/mesure-id.component';
+import { PopupComponent } from './prevmeasures/popup/popup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,11 +17,14 @@ import { MesureIdComponent } from './prevmeasures/mesure-id/mesure-id.component'
     DomaineComponent,
     DomaineIdRisquesComponent,
     RisqueIdMesuresComponent,
-    MesureIdComponent
+    MesureIdComponent,
+    PopupComponent
   ],
   imports: [
     CommonModule,
-    PrevmeasuresRoutingModule
+    PrevmeasuresRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PrevmeasuresModule { }
