@@ -39,7 +39,7 @@
               <td>
                 <div class="btn-group" role="group">
                   <button type="button" class="btn btn-outline-primary">Supprimer</button>
-                  <button type="button" class="btn btn-outline-primary" (click)="openDialogupdate(item.id)" >Modifier</button>
+                  <button type="button" class="btn btn-outline-primary" (click)="getdata(item.id,item.titre,item.description)"data-toggle="modal" data-target="#exampleModal" >Modifier</button>
                 </div>
               </td>
             </tr>
@@ -56,3 +56,41 @@
   </div>
 </div>
 <!-- Recent Sales End -->
+
+<!-- Modalupdate -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <div class="bg-light rounded h-100 p-4">
+          <h6 class="mb-4">Basic Form </h6>
+          <form  #f="ngForm" (ngSubmit)="updatenewstudent(f)">
+            <div class="mb-3">
+              <label for="titre" class="form-label">Titre</label>
+              <input  type="text" class="form-control" id="title" name="titre" #titre="ngModel"[(ngModel)]="datadom.titre" ngModel required minlength="3">
+              <div *ngIf="titre?.touched && titre?.hasError('required')"
+                class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>Le champs titre est obligatoire
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div *ngIf="titre?.touched && titre?.hasError('minlength')"
+                class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>Minimum 3 lettres
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="Description" class="form-label">Description</label>
+              <textarea  class="form-control" placeholder="Ajouter une description ici."[(ngModel)]="datadom.description"
+                id="Textarea" style="height: 150px;"name="description" #description="ngModel" ngModel ></textarea>
+            </div>
+            <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Modalupdate -->

@@ -4,7 +4,7 @@
   <form [formGroup]="popForm">
     <div class="mb-3">
       <label for="titre" class="form-label">Titre</label>
-      <input formControlName="titre" type="text" class="form-control" id="title" required minlength="3">
+      <input formControlName="titre" type="text" class="form-control" id="title"  required minlength="3">
       <div *ngIf="popForm.get('titre')?.touched && popForm.get('titre')?.hasError('required')"
         class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="fa fa-exclamation-circle me-2"></i>Le champs titre est obligatoire

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-popup',
@@ -11,7 +12,7 @@ import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-service
 
 export class PopupComponent {
   obj: any = { titre: '', id: '',third:'' };
-  constructor(private pr: PrevmesuServicesService, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private pr: PrevmesuServicesService, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) {
 
     this.obj.titre = data.name
     this.obj.id = data.id
@@ -23,12 +24,13 @@ export class PopupComponent {
     description: ['']
   });
 
-  saveForm() {
-    if (this.obj.id == 'new') {
+  updateobj: any = { titre: '', description: ''};
 
+  saveForm() {
       switch (this.obj.titre) {
         case 'domaine':
           this.pr.addDomaine(this.popForm.value).subscribe(data => console.log(data))
+          this.toastr.success('Ajouté avec succés',' Instance '+ this.obj.titre )
           break;
         case 'risque':
           const formDat: any = {
@@ -36,6 +38,7 @@ export class PopupComponent {
             domaine_id: this.obj.third
           };
           this.pr.addRisque(formDat,this.obj.third).subscribe(data => console.log(data))
+          this.toastr.success('Ajouté avec succés',' Instance '+ this.obj.titre )
           break;
         case 'mesure':
           const formData: any = {
@@ -43,12 +46,9 @@ export class PopupComponent {
             risque_id: this.obj.third
           };
           this.pr.addMesure(formData,this.obj.third).subscribe(data => console.log(data))
+          this.toastr.success('Ajouté avec succés',' Instance '+ this.obj.titre )
           break;
       }
-    } else {
-      //this.obj.titre
-    }
 
-    // console.log('Form data is ', this.popForm.value);
   }
 }

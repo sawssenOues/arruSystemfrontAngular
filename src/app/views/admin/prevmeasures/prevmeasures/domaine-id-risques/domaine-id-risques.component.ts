@@ -30,12 +30,21 @@ export class DomaineIdRisquesComponent {
       width: '600px' // Width should be included in the configuration object
     });
   }
-  openDialogupdate(num:any) {
-    const dialogRef = this.dialogRef.open(PopupComponent, {
-      data: {
-        name: 'risque', id:num,third:'0'
-      },
-      width: '600px' // Width should be included in the configuration object
+  openDialogupdate(num: any) {
+    this.pr.getdomainebyid(num).subscribe(data => {
+      const auxObj: any = data;
+      const dialogRef = this.dialogRef.open(PopupComponent, {
+        data: {
+          name: 'risque',
+          id: num,
+          third: '0'
+        },
+        width: '600px'
+      });
+
+
     });
   }
+
+
 }

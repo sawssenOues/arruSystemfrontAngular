@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { PrevmeasuresRoutingModule } from './prevmeasures-routing.module';
 import { PrevmeasuresComponent } from './prevmeasures/prevmeasures.component';
 import { DomaineComponent } from './prevmeasures/domaine/domaine.component';

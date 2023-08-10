@@ -20,6 +20,10 @@ export class PrevmesuServicesService {
     return this.http.post('http://localhost:3000/Admin/Domaines/ajout',form).pipe(catchError(this.errorHandler))
   }
 
+  updateDomaine(form:any,num:any){
+    return this.http.put('http://localhost:3000/Admin/Domaines/update/'+ num ,form).pipe(catchError(this.errorHandler))
+  }
+
 
   getAllrisques(num:any){
     return this.http.get('http://localhost:3000/Admin/Domaines/'+ num +'/Risques/').pipe(catchError(this.errorHandler))
