@@ -51,6 +51,10 @@ export class DomaineIdRisquesComponent {
     this.toastr.info('Modifié avec succés',' Instance risque')
 
   }
+  delete(domid:any,id:any){
+    this.pr.deleteRisque(domid,id).subscribe(data => console.log(data))
+    this.toastr.error('Supprimé avec succés',' Instance risque')
+  }
 
 
 }

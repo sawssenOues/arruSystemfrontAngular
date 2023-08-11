@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
 import { PopupComponent } from '../popup/popup.component';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-risque-id-mesures',
@@ -51,4 +50,10 @@ export class RisqueIdMesuresComponent {
     this.pr.updateMesure(dataWithoutId,this.datames.risque_id,this.datames.id)
       this.toastr.info('Modifié avec succés',' Instance mesure')
   }
+
+  delete(risid:any,id:any){
+    this.pr.deleteMesure(risid,id).subscribe(data => console.log(data))
+    this.toastr.error('Supprimé avec succés',' Instance mesure')
+  }
+
 }

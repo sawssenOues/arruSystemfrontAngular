@@ -24,7 +24,9 @@ export class PrevmesuServicesService {
     return this.http.put('http://localhost:3000/Admin/Domaines/update/'+ num ,form).pipe(catchError(this.errorHandler))
   }
 
-
+  deleteDomaine(num:any){
+    return this.http.delete('http://localhost:3000/Admin/Domaines/delete/'+ num).pipe(catchError(this.errorHandler))
+  }
 
 
   getAllrisques(num:any){
@@ -41,10 +43,13 @@ export class PrevmesuServicesService {
   updateRisque(form:any,n:any,num:any){
     return this.http.put('http://localhost:3000/Admin/Domaines/'+ n +'/Risques/update/'+ num ,form).pipe(catchError(this.errorHandler))
   }
+  deleteRisque(n:any,num:any){
+    return this.http.delete('http://localhost:3000/Admin/Domaines/'+ n +'/Risques/delete/'+ num).pipe(catchError(this.errorHandler))
+  }
 
 
 
-  
+
 
   getAllmesures(num:any){
     return this.http.get('http://localhost:3000/Admin/Risques/'+ num +'/Mesures' ).pipe(catchError(this.errorHandler))
@@ -58,7 +63,9 @@ export class PrevmesuServicesService {
   updateMesure(form:any,n:any,num:any){
     return this.http.put('http://localhost:3000/Admin/Risques/'+ n +'/Mesures/update/'+ num ,form).pipe(catchError(this.errorHandler))
   }
-
+  deleteMesure(n:any,num:any){
+    return this.http.delete('http://localhost:3000/Admin/Risques/'+ n +'/Mesures/delete/'+ num).pipe(catchError(this.errorHandler))
+  }
 
 
 

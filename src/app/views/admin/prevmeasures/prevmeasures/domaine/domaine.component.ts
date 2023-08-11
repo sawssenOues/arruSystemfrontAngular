@@ -50,4 +50,10 @@ export class DomaineComponent implements OnInit {
 
   }
 
+  delete(id:any){
+    this.pr.deleteDomaine(id).subscribe(data => console.log(data))
+    this.toastr.error('Supprimé avec succés',' Instance domaine')
+  }
+
+
 }
