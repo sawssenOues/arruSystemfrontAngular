@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
 import { PopupComponent } from '../popup/popup.component';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-domaine-id-risques',
   templateUrl: './domaine-id-risques.component.html',
@@ -14,7 +14,7 @@ export class DomaineIdRisquesComponent {
   n=''
   obj:any
   dataArray:any=[]
-  constructor(private route: Router, private pr : PrevmesuServicesService ,private aroute:ActivatedRoute, private dialogRef: MatDialog) {
+  constructor(private route: Router, private pr : PrevmesuServicesService ,private aroute:ActivatedRoute, private dialogRef: MatDialog, private toastr: ToastrService) {
 
     this.aroute.params.subscribe(data=>this.n=data['id'])
     this.pr.getdomainebyid(this.n).subscribe(data=>{this.obj=data})
@@ -47,14 +47,9 @@ export class DomaineIdRisquesComponent {
   updatenewstudent(f:any){
     const { id, ...dataWithoutId } = this.dataris;
     console.log(dataWithoutId)
-    this.pr.updateRisque(dataWithoutId,this.dataris.domaine_id,this.dataris.id).subscribe(response=>
-      {
-      console.log(response)
+    this.pr.updateRisque(dataWithoutId,this.dataris.domaine_id,this.dataris.id).subscribe(data => console.log(data))
+    this.toastr.info('Modifié avec succés',' Instance risque')
 
-      },(err:HttpErrorResponse)=>{
-        console.log(err.message)
-
-      })
   }
 
 

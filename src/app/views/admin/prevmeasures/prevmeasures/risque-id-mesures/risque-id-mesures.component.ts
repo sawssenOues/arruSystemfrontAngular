@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-services.service';
 import { PopupComponent } from '../popup/popup.component';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-risque-id-mesures',
   templateUrl: './risque-id-mesures.component.html',
@@ -15,7 +15,7 @@ export class RisqueIdMesuresComponent {
   num=''
   obj:any
   dataArray:any=[]
-  constructor(private route: Router, private pr : PrevmesuServicesService ,private aroute:ActivatedRoute , private dialogRef: MatDialog) {
+  constructor(private route: Router, private pr : PrevmesuServicesService ,private aroute:ActivatedRoute , private dialogRef: MatDialog, private toastr: ToastrService) {
 
     this.aroute.params.subscribe(data=>this.n=data['id'])
     this.aroute.params.subscribe(data=>this.num=data['idr'])
@@ -48,13 +48,7 @@ export class RisqueIdMesuresComponent {
 
   updatenewstudent(f:any){
     const { id, ...dataWithoutId } = this.datames;
-    this.pr.updateMesure(dataWithoutId,this.datames.risque_id,this.datames.id).subscribe(response=>
-      {
-      console.log(response)
-
-      },(err:HttpErrorResponse)=>{
-        console.log(err.message)
-
-      })
+    this.pr.updateMesure(dataWithoutId,this.datames.risque_id,this.datames.id)
+      this.toastr.info('Modifié avec succés',' Instance mesure')
   }
 }

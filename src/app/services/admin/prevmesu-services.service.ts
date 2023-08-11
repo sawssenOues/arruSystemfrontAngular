@@ -25,6 +25,8 @@ export class PrevmesuServicesService {
   }
 
 
+
+
   getAllrisques(num:any){
     return this.http.get('http://localhost:3000/Admin/Domaines/'+ num +'/Risques/').pipe(catchError(this.errorHandler))
   }
@@ -41,6 +43,8 @@ export class PrevmesuServicesService {
   }
 
 
+
+  
 
   getAllmesures(num:any){
     return this.http.get('http://localhost:3000/Admin/Risques/'+ num +'/Mesures' ).pipe(catchError(this.errorHandler))

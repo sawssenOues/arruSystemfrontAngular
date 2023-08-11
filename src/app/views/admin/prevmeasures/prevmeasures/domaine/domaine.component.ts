@@ -4,6 +4,7 @@ import { PrevmesuServicesService } from 'src/app/services/admin/prevmesu-service
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-domaine',
   templateUrl: './domaine.component.html',
@@ -11,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class DomaineComponent implements OnInit {
   dataArray: any = []
-  constructor(private route: Router, private pr: PrevmesuServicesService, private dialogRef: MatDialog) {
+  constructor(private route: Router, private pr: PrevmesuServicesService, private dialogRef: MatDialog, private toastr: ToastrService) {
 
 
   }
@@ -44,14 +45,9 @@ export class DomaineComponent implements OnInit {
 
   updatenewstudent(f:any){
     let data=f.value
-    this.pr.updateDomaine(data,this.datadom.id).subscribe(response=>
-      {
-      console.log(response)
+    this.pr.updateDomaine(data,this.datadom.id).subscribe(data => console.log(data))
+    this.toastr.info('Modifié avec succés',' Instance domaine')
 
-      },(err:HttpErrorResponse)=>{
-        console.log(err.message)
-
-      })
   }
 
 }
