@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GuardadminGuard } from './guards/guardadmin.guard';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout/admin-layout.component';
 import { AuthAdminLayoutComponent } from './layouts/admin/auth-admin-layout/auth-admin-layout.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { UserLayoutComponent } from './layouts/user/user-layout/user-layout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'admin', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin/login', pathMatch: 'full' },
   //routing for user
   {path:'',component:UserLayoutComponent, children:[
     {path:'dashboard',loadChildren:()=>import('./views/user/dashboard/dashboard.module').then(m=>m.DashboardModule)},
     {path:'login',loadChildren:()=>import('./views/user/login-user/login-user.module').then(m=>m.LoginUserModule)}
   ]},
   //routing for admin
-  {path:'admin',component:AdminLayoutComponent,children:[
+  {path:'admin',component:AdminLayoutComponent,canActivate:[GuardadminGuard],children:[
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path:'dashboard',loadChildren:()=>import('./views/admin/dashboard/dashboard.module').then(m=>m.DashboardModule)},
     {path:'prevmeasures',loadChildren:()=>import('./views/admin/prevmeasures/prevmeasures.module').then(m=>m.PrevmeasuresModule)},

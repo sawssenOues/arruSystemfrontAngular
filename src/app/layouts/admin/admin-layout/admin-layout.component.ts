@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmittersService } from 'src/app/services/admin/emitters.service';
 
 
 @Component({
@@ -14,11 +15,17 @@ export class AdminLayoutComponent {
     private http: HttpClient,
     private router: Router,
 
-  ) {}
-submit(){ // logout
-  this.http.post('http://localhost:3000/Admin/logout', {}, {withCredentials: true})
-  .subscribe(() => this.router.navigate(['/admin/login']));
-}
+  ) {  EmittersService.authEmitter.subscribe(
+        (auth: boolean) => console.log(auth)) }
+
+
+  submit() { // logout
+    this.http.post('http://localhost:3000/Admin/logout', {}, { withCredentials: true })
+      .subscribe(() => {
+        this.router.navigate(['/admin/login'])
+        EmittersService.authEmitter.emit(false); // Emit the event here
+      });
+  }
 
 
 }
