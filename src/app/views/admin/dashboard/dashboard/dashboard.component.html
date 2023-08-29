@@ -1,266 +1,122 @@
-<!-- Sale & Revenue Start -->
-            <div class="container-fluid pt-4 px-4">
-              <div class="row g-4">
-                  <div class="col-sm-6 col-xl-3">
-                      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                          <i class="fa fa-chart-line fa-3x text-primary"></i>
-                          <div class="ms-3">
-                              <p class="mb-2">Today Sale</p>
-                              <h6 class="mb-0">$1234</h6>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                          <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                          <div class="ms-3">
-                              <p class="mb-2">Total Sale</p>
-                              <h6 class="mb-0">$1234</h6>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                          <i class="fa fa-chart-area fa-3x text-primary"></i>
-                          <div class="ms-3">
-                              <p class="mb-2">Today Revenue</p>
-                              <h6 class="mb-0">$1234</h6>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                      <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                          <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                          <div class="ms-3">
-                              <p class="mb-2">Total Revenue</p>
-                              <h6 class="mb-0">$1234</h6>
-                          </div>
-                      </div>
-                  </div>
+<!--
+<div class="bg-light rounded h-100 p-4">
+  <h6 class="mb-4">Basic Form {{obj.titre}}</h6>
+  <form [formGroup]="popForm">
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input formControlName="titre" type="text" class="form-control" id="title"  required minlength="3">
+      <div *ngIf="popForm.get('titre')?.touched && popForm.get('titre')?.hasError('required')"
+        class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-circle me-2"></i>Le champs titre est obligatoire
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div *ngIf="popForm.get('titre')?.touched && popForm.get('titre')?.hasError('minlength')"
+        class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-circle me-2"></i>Minimum 3 lettres
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="Description" class="form-label">Description</label>
+      <textarea formControlName="description" class="form-control" placeholder="Ajouter une description ici."
+        id="Textarea" style="height: 150px;"></textarea>
+    </div>
+    <button type="submit" (click)="saveForm()" class="btn btn-primary">Enregistrer</button>
+  </form>
+</div>
+ -->
+
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+
+    <div class="bg-light rounded h-100 p-4">
+      <h6 class="mb-4">Liste d'utilisateurs</h6>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Email</th>
+            <th scope="col">Image</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userItem of userArray" >
+            <th scope="row">1</th>
+            <td>{{userItem.nom}}</td>
+            <td>{{userItem.prenom}}</td>
+            <td>{{userItem.date_naiss | date: 'dd/MM/yyyy'}}</td>
+            <td>{{userItem.email}}</td>
+            <td><img class="rounded-circle flex-shrink-0" [src]="imagePath+userItem.image" alt="" style="width: 40px; height: 40px;"></td>
+            <td>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary"(click)="setDelete(userItem) ">Supprimer</button>
+                <button type="button" class="btn btn-outline-primary" (click)="setUpdate(userItem) "data-toggle="modal" data-target="#exampleModal" >Modifier</button>
               </div>
-          </div>
-          <!-- Sale & Revenue End -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="bg-light rounded h-100 p-4">
+      <h6 class="mb-4">Ajouter Utilisateur</h6>
+      <form>
+        <div class="mb-3">
+          <label  class="form-label">Nom</label>
+          <input type="email" [(ngModel)]="nom" [ngModelOptions]="{standalone: true}" class="form-control" id="nom">
+        </div>
+        <div class="mb-3">
+          <label  class="form-label">Prenom</label>
+          <input type="email" [(ngModel)]="prenom" [ngModelOptions]="{standalone: true}" class="form-control" id="prenom" >
+        </div>
+        <div class="mb-3">
+          <label  class="form-label">Date naissance</label>
+          <input type="email" [(ngModel)]="date_naiss" [ngModelOptions]="{standalone: true}" class="form-control" id="date_naiss" placeholder="yyyy-mm-dd">
+        </div>
+        <div class="mb-3">
+          <label  class="form-label">Email address</label>
+          <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" id="email" aria-describedby="emailHelp">
+        </div>
+        <h6 class="mb-4">Image</h6>
+        <div class="mb-3">
+          <label class="form-label">Image</label>
+          <ng-container *ngIf="!selectedFile">
+            <img class="rounded-circle flex-shrink-0" [src]="imagePath + image" alt="" style="width: 40px; height: 40px;">
+          </ng-container>
+          <input type="file" (change)="onFileSelected($event)" class="form-control" id="image">
+        </div>
 
 
-          <!-- Sales Chart Start -->
-          <div class="container-fluid pt-4 px-4">
-              <div class="row g-4">
-                  <div class="col-sm-12 col-xl-6">
-                      <div class="bg-light text-center rounded p-4">
-                          <div class="d-flex align-items-center justify-content-between mb-4">
-                              <h6 class="mb-0">Worldwide Sales</h6>
-                              <a href="">Show All</a>
-                          </div>
-                          <canvas id="worldwide-sales"></canvas>
-                      </div>
-                  </div>
-                  <div class="col-sm-12 col-xl-6">
-                      <div class="bg-light text-center rounded p-4">
-                          <div class="d-flex align-items-center justify-content-between mb-4">
-                              <h6 class="mb-0">Salse & Revenue</h6>
-                              <a href="">Show All</a>
-                          </div>
-                          <canvas id="salse-revenue"></canvas>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!-- Sales Chart End -->
 
+         <button type="submit" class="btn btn-primary" (click)="save()" >Enregistrer</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- <form>
+  <div class="form-group">
+    <label>Student Name</label>
+    <input type="text" [(ngModel)]="stname" [ngModelOptions]="{standalone: true}" class="form-control" id="stname" placeholder="Enter Name">
+  </div>
 
-          <!-- Recent Sales Start -->
-          <div class="container-fluid pt-4 px-4">
-              <div class="bg-light text-center rounded p-4">
-                  <div class="d-flex align-items-center justify-content-between mb-4">
-                      <h6 class="mb-0">Recent Salse</h6>
-                      <a href="">Show All</a>
-                  </div>
-                  <div class="table-responsive">
-                      <table class="table text-start align-middle table-bordered table-hover mb-0">
-                          <thead>
-                              <tr class="text-dark">
-                                  <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                  <th scope="col">Date</th>
-                                  <th scope="col">Invoice</th>
-                                  <th scope="col">Customer</th>
-                                  <th scope="col">Amount</th>
-                                  <th scope="col">Status</th>
-                                  <th scope="col">Action</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td><input class="form-check-input" type="checkbox"></td>
-                                  <td>01 Jan 2045</td>
-                                  <td>INV-0123</td>
-                                  <td>Jhon Doe</td>
-                                  <td>$123</td>
-                                  <td>Paid</td>
-                                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                              </tr>
-                              <tr>
-                                  <td><input class="form-check-input" type="checkbox"></td>
-                                  <td>01 Jan 2045</td>
-                                  <td>INV-0123</td>
-                                  <td>Jhon Doe</td>
-                                  <td>$123</td>
-                                  <td>Paid</td>
-                                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                              </tr>
-                              <tr>
-                                  <td><input class="form-check-input" type="checkbox"></td>
-                                  <td>01 Jan 2045</td>
-                                  <td>INV-0123</td>
-                                  <td>Jhon Doe</td>
-                                  <td>$123</td>
-                                  <td>Paid</td>
-                                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                              </tr>
-                              <tr>
-                                  <td><input class="form-check-input" type="checkbox"></td>
-                                  <td>01 Jan 2045</td>
-                                  <td>INV-0123</td>
-                                  <td>Jhon Doe</td>
-                                  <td>$123</td>
-                                  <td>Paid</td>
-                                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                              </tr>
-                              <tr>
-                                  <td><input class="form-check-input" type="checkbox"></td>
-                                  <td>01 Jan 2045</td>
-                                  <td>INV-0123</td>
-                                  <td>Jhon Doe</td>
-                                  <td>$123</td>
-                                  <td>Paid</td>
-                                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
-          </div>
-          <!-- Recent Sales End -->
+  <div class="form-group">
+    <label>Course</label>
+    <input type="text" [(ngModel)]="course" [ngModelOptions]="{standalone: true}" class="form-control" id="course" placeholder="Enter Name">
+  </div>
+  <div class="form-group">
+      <label>Fee</label>
+      <input type="text" [(ngModel)]="fee" [ngModelOptions]="{standalone: true}" class="form-control" id="fee" placeholder="Enter Fee">
+    </div>
 
+  <button type="submit" class="btn btn-primary mt-4" (click)="save()" >Save</button>
 
-          <!-- Widgets Start -->
-          <div class="container-fluid pt-4 px-4">
-              <div class="row g-4">
-                  <div class="col-sm-12 col-md-6 col-xl-4">
-                      <div class="h-100 bg-light rounded p-4">
-                          <div class="d-flex align-items-center justify-content-between mb-2">
-                              <h6 class="mb-0">Messages</h6>
-                              <a href="">Show All</a>
-                          </div>
-                          <div class="d-flex align-items-center border-bottom py-3">
-                              <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 justify-content-between">
-                                      <h6 class="mb-0">Jhon Doe</h6>
-                                      <small>15 minutes ago</small>
-                                  </div>
-                                  <span>Short message goes here...</span>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-center border-bottom py-3">
-                              <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 justify-content-between">
-                                      <h6 class="mb-0">Jhon Doe</h6>
-                                      <small>15 minutes ago</small>
-                                  </div>
-                                  <span>Short message goes here...</span>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-center border-bottom py-3">
-                              <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 justify-content-between">
-                                      <h6 class="mb-0">Jhon Doe</h6>
-                                      <small>15 minutes ago</small>
-                                  </div>
-                                  <span>Short message goes here...</span>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-center pt-3">
-                              <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 justify-content-between">
-                                      <h6 class="mb-0">Jhon Doe</h6>
-                                      <small>15 minutes ago</small>
-                                  </div>
-                                  <span>Short message goes here...</span>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6 col-xl-4">
-                      <div class="h-100 bg-light rounded p-4">
-                          <div class="d-flex align-items-center justify-content-between mb-4">
-                              <h6 class="mb-0">Calender</h6>
-                              <a href="">Show All</a>
-                          </div>
-                          <div id="calender"></div>
-                      </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6 col-xl-4">
-                      <div class="h-100 bg-light rounded p-4">
-                          <div class="d-flex align-items-center justify-content-between mb-4">
-                              <h6 class="mb-0">To Do List</h6>
-                              <a href="">Show All</a>
-                          </div>
-                          <div class="d-flex mb-2">
-                              <input class="form-control bg-transparent" type="text" placeholder="Enter task">
-                              <button type="button" class="btn btn-primary ms-2">Add</button>
-                          </div>
-                          <div class="d-flex align-items-center border-bottom py-2">
-                              <input class="form-check-input m-0" type="checkbox">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 align-items-center justify-content-between">
-                                      <span>Short task goes here...</span>
-                                      <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-center border-bottom py-2">
-                              <input class="form-check-input m-0" type="checkbox">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 align-items-center justify-content-between">
-                                      <span>Short task goes here...</span>
-                                      <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-center border-bottom py-2">
-                              <input class="form-check-input m-0" type="checkbox" checked>
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 align-items-center justify-content-between">
-                                      <span><del>Short task goes here...</del></span>
-                                      <button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-center border-bottom py-2">
-                              <input class="form-check-input m-0" type="checkbox">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 align-items-center justify-content-between">
-                                      <span>Short task goes here...</span>
-                                      <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-center pt-2">
-                              <input class="form-check-input m-0" type="checkbox">
-                              <div class="w-100 ms-3">
-                                  <div class="d-flex w-100 align-items-center justify-content-between">
-                                      <span>Short task goes here...</span>
-                                      <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!-- Widgets End -->
-
+</form> -->
 
