@@ -44,8 +44,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let userItem of userArray" >
-            <th scope="row">1</th>
+          <tr *ngFor="let userItem of userArray; let i = index" >
+            <th scope="row">{{ i + 1 }}</th>
             <td>{{userItem.nom}}</td>
             <td>{{userItem.prenom}}</td>
             <td>{{userItem.date_naiss | date: 'dd/MM/yyyy'}}</td>
@@ -87,12 +87,15 @@
         </div>
         <h6 class="mb-4">Image</h6>
         <div class="mb-3">
-          <label class="form-label">Image</label>
-          <ng-container *ngIf="!selectedFile">
-            <img class="rounded-circle flex-shrink-0" [src]="imagePath + image" alt="" style="width: 40px; height: 40px;">
+          <ng-container *ngIf="!selectedFile; else fileSelected">
+            <img [src]="imagePath + image" alt="" style="max-width:250px; max-height:200px">
           </ng-container>
+          <ng-template #fileSelected>
+            <img [src]="selectedFileData" alt="" style="max-width:250px; max-height:200px">
+          </ng-template>
           <input type="file" (change)="onFileSelected($event)" class="form-control" id="image">
         </div>
+
 
 
 
@@ -101,22 +104,5 @@
     </div>
   </div>
 </div>
-<!-- <form>
-  <div class="form-group">
-    <label>Student Name</label>
-    <input type="text" [(ngModel)]="stname" [ngModelOptions]="{standalone: true}" class="form-control" id="stname" placeholder="Enter Name">
-  </div>
 
-  <div class="form-group">
-    <label>Course</label>
-    <input type="text" [(ngModel)]="course" [ngModelOptions]="{standalone: true}" class="form-control" id="course" placeholder="Enter Name">
-  </div>
-  <div class="form-group">
-      <label>Fee</label>
-      <input type="text" [(ngModel)]="fee" [ngModelOptions]="{standalone: true}" class="form-control" id="fee" placeholder="Enter Fee">
-    </div>
-
-  <button type="submit" class="btn btn-primary mt-4" (click)="save()" >Save</button>
-
-</form> -->
 

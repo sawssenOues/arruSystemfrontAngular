@@ -13,6 +13,8 @@ export class DashboardComponent {
 
   selectedFile: File | null = null;
 
+  // Add this property to your component class
+  selectedFileData: string | ArrayBuffer | null = null;
 
   imagePath="../../../../../assets/uploads/"
 
@@ -46,13 +48,28 @@ export class DashboardComponent {
   }
 
 
-
-
-
   onFileSelected(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.selectedFile = inputElement.files![0];
+
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.selectedFileData = e.target?.result as string | ArrayBuffer;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    } else {
+      this.selectedFileData = null;
+    }
   }
+
+
+
+
+  // onFileSelected(event: Event): void {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   this.selectedFile = inputElement.files![0];
+  // }
 
   register(): void {
     const bodyData = {
